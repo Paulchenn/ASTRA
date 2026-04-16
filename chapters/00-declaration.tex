@@ -4,7 +4,9 @@
 Ich versichere hiermit wahrheitsgemäß, dass ich die vorliegende \DocName{} mit dem Titel
 \begin{quote}
   \textbf{\Title} \\
-  \textit{\Subtitle}
+  \ifdefstring{\Subtitle}{NoSubtitle}{}{
+    \textit{\Subtitle}
+  }
 \end{quote}
 selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe. Alle Stellen, die wörtlich oder sinngemäß aus veröffentlichten oder nicht veröffentlichten Schriften entnommen sind, habe ich als solche kenntlich gemacht.
 
@@ -13,9 +15,9 @@ Die Arbeit ist in gleicher oder ähnlicher Form noch bei keiner anderen Prüfung
 \vspace{3cm}
 
 \noindent
-\begin{tabular}{@{}p{10cm}@{}}
+\begin{tabular}{@{}p{8cm}@{}}
   \hrulefill \\
-  \Location,\hfill den \DeliveryDate, \hfill \Name
+  \Location, den \DeliveryDate, \Name
 \end{tabular}
 
 \clearpage
