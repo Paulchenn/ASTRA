@@ -131,6 +131,4 @@ Das Projekt ist modular aufgebaut, um die Übersichtlichkeit zu gewährleisten:
 *   **Beispielinhalte:** Die Kapitel sind bewusst mit vielen Beispielkonstrukten (Tabellen, Formeln, Code, Abbildungen, Subfigures, Zitate, Fußnoten, Querverweise) versehen, um die Nutzung zu demonstrieren. Lösche oder ersetze diese nach Bedarf.
 
 ---
-
-----
 Viel Erfolg beim Schreiben deiner wissenschaftlichen Arbeit! 🎓
