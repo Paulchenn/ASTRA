@@ -1,0 +1,35 @@
+% 04-implementation.tex
+\chapter{Implementierung}
+\label{chap:implementation}
+
+Beschreibe die konkrete Umsetzung deines Systems oder Ansatzes in der Praxis. Während das vorherige Kapitel die Theorie behandelte, geht es hier um die tatsächliche Programmierung oder Konstruktion.
+
+\section{Systemarchitektur}
+Die allgemeine Architektur des Systems ist in Abbildung~\ref{fig:architecture} dargestellt. Solche Referenzen im Text sind wichtig, damit die Lesenden wissen, wann sie eine Grafik betrachten sollen.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.6\linewidth]{example-image-b}
+  \caption{Architekturdiagramm des vorgeschlagenen Systems.}
+  \label{fig:architecture}
+\end{figure}
+
+\section{Modulbeschreibung}
+Die Software wurde in mehrere funktionale Bausteine unterteilt. Für solche Erklärungen eignet sich die \texttt{description}-Umgebung hervorragend:
+\begin{description}
+  \item[Datenbeschaffungs-Modul:] Verantwortlich für das Laden der Rohdaten. Hierbei kommen Bibliotheken wie \texttt{pandas} und \texttt{numpy} zum Einsatz.
+  \item[Verarbeitungs-Modul:] Führt die Transformation der Signale durch und wendet die in Abschnitt~\ref{chap:methodology} beschriebenen mathematischen Modelle an.
+  \item[Visualisierungs-Modul:] Erzeugt Dashboards und Plots für den Endnutzer.
+\end{description}
+
+\section{Ergebnisvisualisierung mit PGFPlots}
+Um Messreihen oder Evaluationsmetriken direkt in \LaTeX{} ansprechend und im Stil der Arbeit einheitlich zu visualisieren, empfiehlt sich das Paket \texttt{pgfplots}. Abbildung~\ref{fig:pgfplot_example} zeigt ein einfaches Beispiel eines Liniendiagramms für einen Trainingsverlauf.
+
+\begin{figure}[htbp]
+  \centering
+  \import{figures/pgf/}{training_plot.pgf}
+  \caption{Visualisierung von Trainings- und Validierungsmetriken mittels PGFPlots.}
+  \label{fig:pgfplot_example}
+\end{figure}
+
+\clearpage

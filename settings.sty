@@ -1,0 +1,197 @@
+% settings.sty
+% Zusätzliche Pakete & Einstellungen für die Masterthesis
+
+\ProvidesPackage{settings}[15.04.2026 v1.0 Settings for a academic report]
+
+% ========================================
+% VORBEREITUNG FÜR TITELSEITE (etoolbox für \ifdefstring)
+% ========================================
+\usepackage{etoolbox}
+
+% ========================================
+% METADATEN FÜR TITELSEITE (ANPASSEN!)
+% ========================================
+\newcommand*{\Title}{Title of scientific report}
+\newcommand*{\Subtitle}{Subtitle}
+
+\newcommand*{\Name}{Max Musterman, B. Eng.}
+\newcommand*{\Id}{123456}
+\newcommand*{\DateOfBirth}{01. Januar 2000}
+\newcommand*{\PlaceOfBirth}{Musterhausen}
+
+\newcommand*{\Location}{Karlsruhe}
+\newcommand*{\DeliveryDate}{01.01.2025}
+
+\newcommand*{\University}{Hochschule Karlsruhe}
+\newcommand*{\Faculty}{Fakultät für Maschinenbau und Mechatronik}
+
+\newcommand*{\Degree}{Master of Science}
+\newcommand*{\DegreeShort}{M. Sc.}
+
+\newcommand*{\DocName}{Masterthesis}
+
+\newcommand*{\Supervisor}{Prof.~Dr.-Ing.~Donald~Duck}
+\newcommand*{\CoSupervisor}{Prof.~Dr.-Ing.~Dagobert~Duck}
+
+\newcommand*{\CompanyName}{NoCompanyInvolved} % Firmenname oder "NoCompanyInvolved" für keinen Firmenbetreuer
+\newcommand*{\CompSupervisor}{Tick~Duck}
+
+% ========================================
+% SCHRIFTARTEN (Deutsche Typografie-Regeln)
+% ========================================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern} % Latin Modern (gute deutsche Zeichensätze)
+
+% ========================================
+% BILD- & GRAFIK-UNTERSTÜTZUNG
+% ========================================
+\usepackage{import}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18} % Empfohlen für die aktuelle PGFPlots-Version
+\usepackage{graphicx}
+\graphicspath{{figures/}} % Alle Grafiken liegen im figures/-Verzeichnis
+% Logos vertikal zentriert ausrichten
+\newcommand{\centerlogo}[2][1.5cm]{%
+  \raisebox{-0.5\height}{\includegraphics[height=#1]{#2}}%
+}
+
+% Logos oben bündig ausrichten
+\newcommand{\toplogo}[2][1.5cm]{%
+  \raisebox{-\height}{\includegraphics[height=#1]{#2}}%
+}
+
+% Bildunterschriften mit capt-of-KOMA-Kompatibilität
+% \usepackage{capt-of} % >>>>> !!!!! KOLIDIERT MIT SCRBOOK !!!!! <<<<<
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup[figure]{labelfont=bf,textfont=normalfont,format=plain}
+\captionsetup[table]{labelfont=bf,textfont=normalfont,format=plain}
+
+% ========================================
+% Nomenklatur
+% ========================================
+\usepackage[intoc]{nomencl}      % intoc = Eintrag im Inhaltsverzeichnis
+\renewcommand{\nomname}{Nomenklatur} % Kapitelüberschrift
+\makenomenclature
+
+% ========================================
+% TABELLEN
+% ========================================
+\usepackage{array}
+\usepackage{longtable}
+\usepackage{booktabs}
+\usepackage{tabularx}
+
+% ========================================
+% LISTEN & AUFZÄHLUNGEN
+% ========================================
+\usepackage{enumitem}
+\setlist{nosep} % Reduziere Abstände in Listen
+
+% ========================================
+% ABKÜRZUNGEN
+% ========================================
+\usepackage[printonlyused]{acronym}
+
+% ========================================
+% CODE & QUELLTEXT
+% ========================================
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\footnotesize,
+  breaklines=true,
+  frame=single,
+  rulecolor=\color{gray!30},
+  backgroundcolor=\color{gray!5},
+  keywordstyle=\color{blue!70!black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!60!black},
+  tabsize=2,
+  captionpos=t,
+  showspaces=false,
+  showstringspaces=false
+}
+
+% ========================================
+% MATHEMATIK & FORMELN
+% ========================================
+\usepackage{amsmath, amssymb, amstext}
+\usepackage{mathtools}
+\usepackage{siunitx} % SI-Einheiten
+
+% ========================================
+% QUERFORMAT & SEITENLAYOUT
+% ========================================
+\usepackage[
+  a4paper,
+  left=2.5cm,    % linker Rand
+  right=2.5cm, % rechter Rand
+  top=2.5cm,   % oberer Rand
+  bottom=2.0cm,% unterer Rand
+  includeheadfoot
+]{geometry}
+\usepackage{pdflscape}
+
+% ========================================
+% Farben
+% ========================================
+\usepackage{xcolor}
+\definecolor{hka_blue}{RGB}{58,104,170} % Beispiel-HKA-Blau (anpassbar)
+\definecolor{hka_red}{RGB}{214,37,6} % Beispiel-HKA-Blau (anpassbar)
+
+% ========================================
+% Kopf-/Fusszeile
+% ========================================
+\usepackage[automark]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+% Alle voreingestellten Kopf-/Fußzeilen löschen
+\clearpairofpagestyles
+% Logo in der Außenkopfleiste:
+% bei zweiseitig = links auf geraden, rechts auf ungeraden Seiten
+\ohead{%
+  \centerlogo[1.4cm]{png/hka_logo}%
+  \ifdefstring{\CompanyName}{NoCompanyInvolved}{}{
+    \hspace{0.0cm}%
+    \centerlogo[1cm]{example-image-a}%
+  }%
+}
+\ihead{\headmark}
+% Seitenzahl in der Fußzeile zentriert
+\cfoot{\pagemark}
+% Optional: auch auf Kapitelanfangsseiten Kopfzeile anzeigen
+% \renewcommand*{\chapterpagestyle}{scrheadings}
+
+% ========================================
+% SONSTIGES
+% ========================================
+\usepackage{microtype} % Feineinstellung der Typografie
+\usepackage{placeins}  % Floats fixieren: \FloatBarrier
+\usepackage{scrhack}   % KOMA mit anderen Paketen harmonisieren
+\usepackage{makecell}  % Zeilenumbruch in Tabellenzellen
+\usepackage{hyperref}  % Hyperlinks
+\hypersetup{
+	%hyperindex=true,
+	%linktocpage=true, % Page number linked instead of title
+	colorlinks=true,
+	linkcolor=black,
+	filecolor=black,      
+	urlcolor=black,
+	pdftitle={\Title},
+	citecolor=black,
+	pdfpagemode=UseNone, % No automatic view setting
+	pdfstartpage=1,      % Starts on the first page
+	pdfstartview=Fit     % Shows the entire page in the window
+}
+\usepackage{lipsum}
+
+% ========================================
+% FONTS (optional, für bessere Lesbarkeit)
+% ========================================
+% Uncomment if you want to use Palatino / other fonts:
+% \usepackage{mathpazo}
+% \usepackage{helvet}
+\usepackage{setspace}
+
+% Ende settings.sty
+\endinput

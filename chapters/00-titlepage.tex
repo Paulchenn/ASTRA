@@ -1,0 +1,64 @@
+% 00-titlepage.tex
+\thispagestyle{empty}
+\pdfbookmark[0]{Titelblatt}{title}
+
+\begin{titlepage}
+
+  % Logos oben
+  \vspace*{-2.5cm}
+  \begin{center}
+    \centerlogo[4.2cm]{png/hka_logo}%
+    \ifdefstring{\CompanyName}{NoCompanyInvolved}{}{
+      \hspace{0.0cm}%
+      \centerlogo[4.2cm]{example-image-a}
+      % \centerlogo[3cm]{png/ict_logo}%
+    }%
+  \end{center}
+
+  % Hauptblock zentriert
+  \begin{center}
+    \vspace{0.1cm}
+    \LARGE \textbf{\University}\\
+    \vspace{0.3cm}
+    \Large -- \Faculty --
+
+    \vspace{1cm}
+
+    \huge \textbf{\Title}\\
+    % \vspace{0.4cm}
+    \ifdefstring{\Subtitle}{NoSubtitle}{}{
+      \LARGE \Subtitle
+    }
+
+    \vspace{1cm}
+
+    \Large Zur Erlangung des akademischen Grades \\
+    \vspace{0.3cm}
+    \LARGE \textbf{\Degree} \\
+    (\DegreeShort) \\
+    \vspace{0.3cm}
+    \Large vorgelegte \\
+    \vspace{0.3cm}
+    \LARGE \textbf{\DocName} \\
+    \vspace{0.3cm}
+    \Large von \\
+    \vspace{0.3cm}
+    \Large \textbf{\Name} (\Id)\\
+    \Large geb. am \DateOfBirth \\
+    in \PlaceOfBirth \\
+  \end{center}
+
+  % Ein einziges vfill, um die Tabelle nach unten zu drücken
+  \vfill
+
+  % Tabelle unten (zentriert oder flushleft, wie gewünscht)
+  \begin{center} % oder \noindent\begin{tabular}{...} ohne center
+    \begin{tabular}{lll}
+      Tag der Abgabe      & : & \DeliveryDate \\
+      Erstprüfer          & : & \Supervisor \\
+      Zweitprüfer         & : & \CoSupervisor\\
+      \ifdefstring{\CompanyName}{NoCompanyInvolved}{}{Betreuer \CompanyName & : & \CompSupervisor\\}
+    \end{tabular}
+  \end{center}
+
+\end{titlepage}

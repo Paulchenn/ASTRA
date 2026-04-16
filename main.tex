@@ -1,0 +1,89 @@
+\documentclass[
+  11pt,                % Schriftgröße
+  a4paper,             % Papierformat
+  headsepline,         % Trennlinie unter der Kopfzeile
+  footsepline,         % Trennlinie über der Fußzeile
+  twoside,             % Zweiseitig
+  openright,           % Neue Kapitel auf rechten Seiten
+  parskip=full,        % Absatzabstand statt Einzug
+  numbers=noenddot,    % Kapitelnummern ohne abschließenden Punkt
+  listof=totoc         % Alle Verzeichnisse in Inhaltsverzeichniss
+]{scrbook}             % KOMA-Script-Klasse (empfohlen für Thesen)
+
+% ========================================
+% PAKETE & EINSTELLUNGEN
+% ========================================
+\usepackage{settings} % Eigenes Paket mit weiteren Einstellungen
+
+% Spracheinstellungen (Deutsch)
+\usepackage[ngerman]{babel}
+\usepackage[babel,german=quotes]{csquotes}
+
+% Literaturverwaltung: BibLaTeX mit Biber
+\usepackage[
+  backend=biber,
+  style=ieee,
+  sorting=none,
+  maxcitenames=2,
+  maxbibnames=99,
+  isbn=false,
+   url=false,
+   doi=false,
+   eprint=false
+]{biblatex}
+\addbibresource{bibliography.bib}
+
+% ========================
+% DOKUMENTSTART
+% ========================
+\begin{document}
+
+% ========================
+% VORTEIL (römische Seitenzahlen, einfacher Zeilenabstand)
+% ========================
+\frontmatter          % römische Seitenzahlen, unnummerierte Kapitel
+\setstretch{1.0}      % ungefähr Word „1,0“
+
+\include{chapters/00-titlepage}
+% \include{chapters/00-preface}
+\include{chapters/00-declaration}
+
+\input{nomenclature}
+
+\tableofcontents
+\include{acronyms.tex}
+\printnomenclature
+\listoffigures
+\listoftables
+
+% ========================
+% HAUPTTEIL (arabische Seitenzahlen, 1,5-zeilig)
+% ========================
+\mainmatter           % arabische Seitenzahlen, nummerierte Kapitel
+\onehalfspacing       % ungefähr Word „1,5“
+
+\include{chapters/02-introduction}
+\include{chapters/03-related-work}
+\include{chapters/04-methodology}
+\include{chapters/05-implementation}
+\include{chapters/06-evaluation}
+\include{chapters/07-conclusion}
+
+% ========================
+% ANHANG (Kapitel A, B, C, ... – meist wie Hauptteil gesetzt)
+% ========================
+\appendix             % Kapitelnummern werden zu A, B, C, ...
+\onehalfspacing       % meist gleicher Abstand wie im Hauptteil
+
+\include{chapters/appendix-a}
+\include{chapters/appendix-b}
+
+% ========================
+% BACKMATTER (z. B. Literatur, wieder einfacher Abstand)
+% ========================
+\backmatter           % unnummerierte Kapitel
+\setstretch{1.0}      % optional wieder enger, z. B. fürs Literaturverzeichnis
+
+\printbibliography[heading=bibintoc]
+
+\end{document}
