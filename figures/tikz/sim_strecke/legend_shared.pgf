@@ -1,0 +1,69 @@
+\begin{tikzpicture}[baseline=(current bounding box.center)]
+
+  %% ── Spalte 1: ax / ay ────────────────────────────────────────────
+  \draw[color=clrAx, line width=0.8pt]
+    (0cm, 0mm) -- ++(14pt, 0);
+  \node[font=\tiny, anchor=west]
+    at ({16pt}, 0mm) {$a_\mathrm{x}$};
+
+  \draw[color=clrAy, line width=0.8pt]
+    (0cm, -4mm) -- ++(14pt, 0);
+  \node[font=\tiny, anchor=west]
+    at ({16pt}, -4mm) {$a_\mathrm{y}$};
+
+  %% ── Spalte 2: v / Gerade ─────────────────────────────────────────
+  \draw[color=clrV, line width=0.8pt]
+    (1.5cm, 0mm) -- ++(14pt, 0);
+  \node[font=\tiny, anchor=west]
+    at ({1.5cm + 16pt}, 0mm) {$v$};
+
+  \fill[clrGerade, fill opacity=0.50]
+    (1.5cm, -5.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({1.5cm + 16pt}, -4mm) {konst. Gerade};
+
+  %% ── Spalte 3: Beschl. / Bremsung ─────────────────────────────
+  \fill[clrAccel, fill opacity=0.50]
+    (4.25cm, -1.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({4.25cm + 16pt}, 0mm) {Beschl.};
+
+  \fill[clrBrake, fill opacity=0.50]
+    (4.25cm, -5.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({4.25cm + 16pt}, -4mm) {Bremsung};
+
+  %% ── Spalte 3: Kurve li. / Kurve re. ─────────────────────────────
+  \fill[clrCurveL, fill opacity=0.50]
+    (6.5cm, -1.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({6.5cm + 16pt}, 0mm) {Kurvenfahrt li.};
+
+  \fill[clrCurveR, fill opacity=0.50]
+    (6.5cm, -5.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({6.5cm + 16pt}, -4mm) {Kurvenfahrt re.};
+
+  %% ── Spalte 4: Gebr. Kurve li. / Gebr. Kurve re. ─────────────────
+  \fill[clrCurveBrakeL, fill opacity=0.50]
+    (9.5cm, -1.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({9.5cm + 16pt}, 0mm) {gebr. Kurve li.};
+
+  \fill[clrCurveBrakeR, fill opacity=0.50]
+    (9.5cm, -5.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({9.5cm + 16pt}, -4mm) {gebr. Kurve re.};
+
+  %% ── Spalte 5: Beschl. Kurve li. / Beschl. Kurve re. ─────────────
+  \fill[clrCurveAccelL, fill opacity=0.50]
+    (12.5cm, -1.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({12.5cm + 16pt}, 0mm) {beschl. Kurve li.};
+
+  \fill[clrCurveAccelR, fill opacity=0.50]
+    (12.5cm, -5.5mm) rectangle ++(14pt, 3mm);
+  \node[font=\tiny, anchor=west]
+    at ({12.5cm + 16pt}, -4mm) {beschl. Kurve re.};
+
+\end{tikzpicture}

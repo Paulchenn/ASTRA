@@ -4,10 +4,11 @@
   headsepline,         % Trennlinie unter der Kopfzeile
   footsepline,         % Trennlinie über der Fußzeile
   twoside,             % Zweiseitig
-  openright,           % Neue Kapitel auf rechten Seiten
+  openany,             % Neue Kapitel auf beliebigen Seiten
   parskip=full,        % Absatzabstand statt Einzug
   numbers=noenddot,    % Kapitelnummern ohne abschließenden Punkt
-  listof=totoc         % Alle Verzeichnisse in Inhaltsverzeichniss
+  listof=totoc,        % Alle Verzeichnisse in Inhaltsverzeichniss
+  headings=optiontoheadandtoc % Ermöglicht head=... und toc=... bei \section
 ]{scrbook}             % KOMA-Script-Klasse (empfohlen für Thesen)
 
 % ========================================
@@ -22,14 +23,16 @@
 % Literaturverwaltung: BibLaTeX mit Biber
 \usepackage[
   backend=biber,
-  style=ieee,
+  style=ieee,            % Format des Literaturverzeichnisses bleibt IEEE
+  citestyle=numeric-comp, % <-- fasst Zitate zu Bereichen zusammen
   sorting=none,
+  sortcites=true,
   maxcitenames=2,
   maxbibnames=99,
   isbn=false,
-   url=false,
-   doi=false,
-   eprint=false
+  url=false,
+  doi=false,
+  eprint=false
 ]{biblatex}
 \addbibresource{bibliography.bib}
 
@@ -38,52 +41,58 @@
 % ========================
 \begin{document}
 
+% \listoftodos % Verzeichnis anzeigen
+
 % ========================
 % VORTEIL (römische Seitenzahlen, einfacher Zeilenabstand)
 % ========================
 \frontmatter          % römische Seitenzahlen, unnummerierte Kapitel
-\setstretch{1.0}      % ungefähr Word „1,0“
 
 \include{chapters/00-titlepage}
-% \include{chapters/00-preface}
+\cleardoubleoddemptypage
 \include{chapters/00-declaration}
+\include{chapters/00-preface}
 
 \input{nomenclature}
 
 \tableofcontents
-\include{acronyms.tex}
-\printnomenclature
 \listoffigures
 \listoftables
+\include{acronyms}
+\printnomenclature
 
 % ========================
 % HAUPTTEIL (arabische Seitenzahlen, 1,5-zeilig)
 % ========================
 \mainmatter           % arabische Seitenzahlen, nummerierte Kapitel
-\onehalfspacing       % ungefähr Word „1,5“
 
-\include{chapters/02-introduction}
-\include{chapters/03-related-work}
-\include{chapters/04-methodology}
-\include{chapters/05-implementation}
+\include{chapters/01-introduction}
+\include{chapters/02-related-work}
+\include{chapters/03-methodology}
+\include{chapters/04-validation}
+\include{chapters/05-preparation}
 \include{chapters/06-evaluation}
-\include{chapters/07-conclusion}
+\include{chapters/07-application}
+\include{chapters/08-conclusion-outlook}
+
+% ========================
+% BACKMATTER (z. B. Literatur, wieder einfacher Abstand)
+% ========================
+% \backmatter           % unnummerierte Kapitel
+
+\printbibliography[heading=bibintoc, title={Literaturverzeichnis}]
 
 % ========================
 % ANHANG (Kapitel A, B, C, ... – meist wie Hauptteil gesetzt)
 % ========================
 \appendix             % Kapitelnummern werden zu A, B, C, ...
-\onehalfspacing       % meist gleicher Abstand wie im Hauptteil
 
-\include{chapters/appendix-a}
-\include{chapters/appendix-b}
-
-% ========================
-% BACKMATTER (z. B. Literatur, wieder einfacher Abstand)
-% ========================
-\backmatter           % unnummerierte Kapitel
-\setstretch{1.0}      % optional wieder enger, z. B. fürs Literaturverzeichnis
-
-\printbibliography[heading=bibintoc]
+\include{chapters/app-b-additional-02-related}
+\include{chapters/app-c-additional-03-methodology}  % Ergänzende Dokumentation zur Methodik
+\include{chapters/app-d-additional-04-validation}  % Ergänzende Dokumentation zur Validierung
+\include{chapters/app-e-additional-05-preparation}
+\include{chapters/app-f-additional-06-evaluation}
+\include{chapters/app-g-additional-07-application}  % Ergänzende Dokumentation zur Anwendung
+\include{chapters/app-h-projectplan}
 
 \end{document}

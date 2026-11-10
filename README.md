@@ -1,6 +1,4 @@
-# Academic Scientific Thesis & Report Architecture
-
-**ASTRA** (**A**cademic **S**cientific **T**hesis & **R**eport **A**rchitecture)  ist ein modernes, modular aufgebautes LaTeX-Template für wissenschaftliche Arbeiten wie Bachelor- und Masterarbeiten. Es ist speziell auf die Anforderungen der Hochschule Karlsruhe (HKA) zugeschnitten (z.B. Logos, Struktur, Seitengestaltung), lässt sich aber mit wenigen Anpassungen auf andere Hochschulen, Fakultäten und Studiengänge übertragen. Das Template bietet eine saubere Struktur, vordefinierte Formatierungen, Beispiele für Abbildungen, Tabellen, Formeln und Code-Listings sowie integrierte Unterstützung für Biber/BibLaTeX, Abkürzungsverzeichnis und Nomenklatur.
+# Vorlage für wissenschaftliche Arbeiten (LaTeX) V2.0
 
 Diese LaTeX-Vorlage ist speziell für die Erstellung wissenschaftlicher Arbeiten wie Master- oder Bachelorarbeiten konzipiert. Sie bietet eine klare Struktur, vordefinierte Formatierungen und zahlreiche Beispiele für gängige Elemente wie Abbildungen, Tabellen, Formeln, Code-Listings und Literaturnachweise, um einen schnellen Start zu ermöglichen.
 
@@ -131,4 +129,6 @@ Das Projekt ist modular aufgebaut, um die Übersichtlichkeit zu gewährleisten:
 *   **Beispielinhalte:** Die Kapitel sind bewusst mit vielen Beispielkonstrukten (Tabellen, Formeln, Code, Abbildungen, Subfigures, Zitate, Fußnoten, Querverweise) versehen, um die Nutzung zu demonstrieren. Lösche oder ersetze diese nach Bedarf.
 
 ---
+
+----
 Viel Erfolg beim Schreiben deiner wissenschaftlichen Arbeit! 🎓

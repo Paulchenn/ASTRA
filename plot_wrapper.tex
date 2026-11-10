@@ -1,0 +1,38 @@
+% ================================================================
+%  plot_wrapper.tex – Rendert eine PGF-Datei als eigenständiges PDF
+% ================================================================
+%  Anpassen:
+%    1. \pgfFilePath         – Pfad zur PGF-Datei
+%    2. \plotstandalonetrue  – Standalone-Größe (aus settings.sty)
+%       \plotstandalonefalse – Subplot-Größe    (aus settings.sty)
+%
+%  Kompilieren:  make plot   (oder: pdflatex plot_wrapper.tex)
+% ================================================================
+
+\documentclass[border=5pt]{standalone}
+
+% ---- [1] Benutzereinstellungen (hier anpassen) -------------------
+\providecommand{\pgfFilePath}{figures/pgf/\jobname.pgf}
+
+\newif\ifplotstandalone
+\plotstandalonetrue    % \plotstandalonetrue  = eigenständiger Plot
+                       % \plotstandalonefalse = Subplot-Größe
+% ------------------------------------------------------------------
+
+% [2] geometry-Konflikt mit standalone-Klasse verhindern
+\PassOptionsToPackage{pass}{geometry}
+
+% [3] Einstellungen (Schriftart, Pakete, Größen) aus settings.sty
+\usepackage{settings}
+
+% [4] Plotgröße anhand der gewählten Variante setzen
+\ifplotstandalone
+  \pgfplotsset{width=\pgfStandaloneWidth, height=\pgfStandaloneHeight}
+\else
+  \pgfplotsset{width=\pgfSubplotWidth,    height=\pgfSubplotHeight}
+\fi
+
+% ================================================================
+\begin{document}
+  \input{\pgfFilePath}
+\end{document}

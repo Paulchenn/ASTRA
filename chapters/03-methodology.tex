@@ -1,0 +1,43 @@
+% !TeX root = ../main.tex
+% 03-methodology.tex
+\chapter{Methodik}
+\label{chap:methodology}
+
+\lipsum[1]
+
+\begin{figure}[htbp]
+    \centering
+
+    %% ── Zeile 1: Plots (vertikal mittig zueinander) ──────────────────
+    \begin{minipage}[c]{0.49\textwidth}
+      \centering
+      \noindent\input{figures/tikz/sim_strecke/sim_strecke.pgf}
+    \end{minipage}%
+    \hfill
+    \begin{minipage}[c]{0.49\textwidth}
+      \centering
+      \input{figures/pgf/04_methodology/synthetic_route.pgf}
+    \end{minipage}
+
+    %% ── Zeile 2: Captions (beide bündig auf gleicher Höhe) ───────────
+    \begin{minipage}[t]{0.49\textwidth}
+      \subcaption{Räumliche Trajektorie mit farbkodierten Manöverabschnitten.
+        \label{fig:sim_strecke_tikz}}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.49\textwidth}
+      \subcaption{Signalverläufe mit klassifizierten Manöverabschnitten.
+        \label{fig:sim_strecke_carmaker}}
+    \end{minipage}
+
+    \smallskip
+
+    %% ── Gemeinsame Legende ───────────────────────────────────────────
+    \input{figures/tikz/sim_strecke/legend_shared.pgf}
+
+    \caption{Synthetische Simulationsstrecke als \textit{Ground Truth} zur Kalibrierung der Beschleunigungsschwellwerte.}
+    \label{fig:sim_strecke}
+  \end{figure}
+
+
+% End of File

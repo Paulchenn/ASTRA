@@ -22,6 +22,7 @@
 *.nlo
 *.nls
 *.bcf
+*.run.xml
 
 # Output
 build/

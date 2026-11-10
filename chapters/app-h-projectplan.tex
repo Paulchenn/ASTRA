@@ -1,0 +1,73 @@
+% !TeX root = ../main.tex
+% app-h-projectplan.tex
+
+\chapter{Vollständiger Projektplan}
+\label{chap:pojectplan_full}
+
+% \vspace(2cm)
+\begin{figure}[htbp]
+  \centering
+  \rotatebox{90}{%
+    \resizebox{0.7429\textheight}{!}{%
+      \begin{ganttchart}[
+        hgrid,
+        vgrid,
+        x unit=0.45cm, % Falls das Diagramm breiter/schmaler sein soll (z.B. 0.5cm oder 0.4cm)
+        y unit title=0.7cm,
+        y unit chart=0.45cm,
+        title label font=\bfseries\footnotesize,
+        bar label font=\footnotesize,
+        group label font=\bfseries\footnotesize,
+        milestone label font=\footnotesize\color{hka_blue},
+        milestone/.append style={fill=hka_red},
+        group/.append style={fill=hka_blue, draw=hka_blue}
+      ]{1}{26}
+                
+        % Titelzeilen für die Wochen
+        \gantttitle{Woche der Masterthesis}{26} \\
+        \gantttitlelist{1,...,26}{1} \\
+            
+        % --- AP1: Rahmen & Literatur ---
+        \ganttgroup{AP1: Literaturrecherche}{1}{5} \\
+        \ganttmilestone{M1: Literaturreview abgeschlossen}{5} \\
+            
+        % --- AP2: CarMaker ---
+        \ganttgroup{AP2: Einarbeitung Simulation}{2}{7} \\
+        \ganttmilestone{M2: Schnittstellen verstanden}{7} \\
+            
+        % --- AP3: Realfahrdaten ---
+        \ganttgroup{AP3: Validierung von \dots}{5}{9} \\
+        \ganttmilestone{M3: Validierung abgeschlossen}{9} \\
+            
+        % --- AP4: Manövererkennung ---
+        \ganttgroup{AP4: Entwicklung von \dots}{6}{13} \\
+        \ganttmilestone{M4: Vorläufige \dots}{13} \\
+            
+        % --- AP5: Prüfstand ---
+        \ganttgroup{AP5: Prüfstandsbegleitung}{8}{16} \\
+        \ganttmilestone{M5: Prüfstandsversuche durchgeführt}{16} \\
+            
+        % --- AP6: Auswertung & Berechnung 1 ---
+        \ganttgroup{AP6: Berechnungsvorschriften}{9}{16} \\
+        \ganttmilestone{M6: Auswertungsmethodik \& -pipeline}{16} \\
+            
+        % --- AP7: Auswertung & Berechnung 2 ---
+        \ganttgroup{AP7: Anwendung und Modelle}{15}{21} \\
+        \ganttmilestone{M7: Anwendung}{21} \\
+            
+        % --- AP8: Thesis ---
+        \ganttgroup{AP8: Schreiben / Feinschliff}{20}{23} \\
+        \ganttmilestone{M8: Vollständiger Entwurf}{23} \\
+            
+        % --- AP9: Abschluss ---
+        \ganttgroup{AP9: Puffer}{24}{24} \\
+        \ganttmilestone{M9: Abgabe}{25}
+            
+      \end{ganttchart}
+    }
+  }
+  \caption{Zeitlicher Projektplan der Masterthesis}
+  \label{fig:gantt}
+\end{figure}
+
+% End of File

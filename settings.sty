@@ -1,7 +1,8 @@
+% !TeX root = main.tex
 % settings.sty
 % Zusätzliche Pakete & Einstellungen für die Masterthesis
 
-\ProvidesPackage{settings}[15.04.2026 v1.0 Settings for a academic report]
+\ProvidesPackage{settings}[10.09.2026 v2.0 Settings for a academic report]
 
 % ========================================
 % VORBEREITUNG FÜR TITELSEITE (etoolbox für \ifdefstring)
@@ -11,30 +12,36 @@
 % ========================================
 % METADATEN FÜR TITELSEITE (ANPASSEN!)
 % ========================================
-\newcommand*{\Title}{Title of scientific report}
-\newcommand*{\Subtitle}{Subtitle}
+\newcommand*{\Title}{\LaTeX-Vorlage zur Erstellung einer wissenschaftlichen Ausarbeitung}
+\newcommand*{\Subtitle}{Spezialisiert auf die Hochschule Karlsruhe}
 
-\newcommand*{\Name}{Max Musterman, B. Eng.}
+\newcommand*{\Name}{Max Mustermann, B. Eng.}
 \newcommand*{\Id}{123456}
-\newcommand*{\DateOfBirth}{01. Januar 2000}
+\newcommand*{\DateOfBirth}{01. Januar 1234}
 \newcommand*{\PlaceOfBirth}{Musterhausen}
 
 \newcommand*{\Location}{Karlsruhe}
-\newcommand*{\DeliveryDate}{01.01.2025}
+\newcommand*{\DeliveryDate}{\today}
 
 \newcommand*{\University}{Hochschule Karlsruhe}
 \newcommand*{\Faculty}{Fakultät für Maschinenbau und Mechatronik}
+\newcommand*{\StudyCourse}{Robotik und KI in der Produktion}
 
 \newcommand*{\Degree}{Master of Science}
 \newcommand*{\DegreeShort}{M. Sc.}
 
 \newcommand*{\DocName}{Masterthesis}
+\newcommand*{\DocNr}{26/005}
 
 \newcommand*{\Supervisor}{Prof.~Dr.-Ing.~Donald~Duck}
 \newcommand*{\CoSupervisor}{Prof.~Dr.-Ing.~Dagobert~Duck}
 
 \newcommand*{\CompanyName}{NoCompanyInvolved} % Firmenname oder "NoCompanyInvolved" für keinen Firmenbetreuer
-\newcommand*{\CompSupervisor}{Tick~Duck}
+\newcommand*{\CompSupervisor}{Dipl.-Ing.~Tick~Duck}
+
+% ========================================
+% BIBLIOTHEK (biblatex)
+% ========================================
 
 % ========================================
 % SCHRIFTARTEN (Deutsche Typografie-Regeln)
@@ -47,6 +54,7 @@
 % BILD- & GRAFIK-UNTERSTÜTZUNG
 % ========================================
 \usepackage{import}
+\usepackage{pgfgantt}   % Gantt-Diagramme
 \usepackage{pgfplots}
 \pgfplotsset{compat=1.18} % Empfohlen für die aktuelle PGFPlots-Version
 \usepackage{graphicx}
@@ -55,6 +63,7 @@
 \newcommand{\centerlogo}[2][1.5cm]{%
   \raisebox{-0.5\height}{\includegraphics[height=#1]{#2}}%
 }
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, backgrounds}
 
 % Logos oben bündig ausrichten
 \newcommand{\toplogo}[2][1.5cm]{%
@@ -65,14 +74,33 @@
 % \usepackage{capt-of} % >>>>> !!!!! KOLIDIERT MIT SCRBOOK !!!!! <<<<<
 \usepackage{caption}
 \usepackage{subcaption}
-\captionsetup[figure]{labelfont=bf,textfont=normalfont,format=plain}
-\captionsetup[table]{labelfont=bf,textfont=normalfont,format=plain}
+% \captionsetup[figure]{labelfont=bf,textfont=normalfont,format=plain}
+% \captionsetup[table]{labelfont=bf,textfont=normalfont,format=plain}
+\captionsetup{font={small,sf},labelfont={bf},format=plain}
+\newcommand{\mathdefault}[1]{#1}
+\usepackage{rotating}
 
 % ========================================
 % Nomenklatur
 % ========================================
 \usepackage[intoc]{nomencl}      % intoc = Eintrag im Inhaltsverzeichnis
 \renewcommand{\nomname}{Nomenklatur} % Kapitelüberschrift
+% Definiert die Einheit-Spalte bündig bei 10cm vom linken Rand
+\newcommand{\nomunit}[1]{%
+    \renewcommand{\nomentryend}{%
+        \hspace*{\fill}\makebox[3cm][l]{#1}% Hier 3cm = Breite der Einheiten-Spalte
+    }%
+}
+% Optional: Abstand zwischen Symbol und Beschreibung vergrößern
+\setlength{\nomlabelwidth}{2.0cm} 
+\setlength{\nomitemsep}{-\parsep}
+\renewcommand{\nompreamble}{%
+    \markboth{\nomname}{\nomname}%
+    \noindent
+    \textbf{Symbol} \hspace{1cm} \textbf{Beschreibung} \hfill \makebox[3cm][l]{\textbf{Einheit}} \\
+    \rule{\linewidth}{0.4pt} \par % Eine Trennlinie
+    \vspace{0.5em}
+}
 \makenomenclature
 
 % ========================================
@@ -82,6 +110,12 @@
 \usepackage{longtable}
 \usepackage{booktabs}
 \usepackage{tabularx}
+\usepackage{xltabular}
+\usepackage{multirow}
+\usepackage{threeparttable}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
 
 % ========================================
 % LISTEN & AUFZÄHLUNGEN
@@ -118,56 +152,73 @@
 % ========================================
 \usepackage{amsmath, amssymb, amstext}
 \usepackage{mathtools}
+\usepackage[version=4]{mhchem}
 \usepackage{siunitx} % SI-Einheiten
+\sisetup{
+  locale = DE,           % Setzt Komma als Dezimaltrenner und "bis" als Phrase
+  range-units = single,  % Einheit nur einmal am Ende
+  range-phrase = {\,--\,},   % Nutzt den Bis-Strich
+  per-mode = reciprocal
+}
+\usepackage{bm}
+\DeclareSIUnit\grav{g}
 
 % ========================================
 % QUERFORMAT & SEITENLAYOUT
 % ========================================
 \usepackage[
   a4paper,
-  left=2.5cm,    % linker Rand
-  right=2.5cm, % rechter Rand
-  top=2.5cm,   % oberer Rand
-  bottom=2.0cm,% unterer Rand
-  includeheadfoot
+  left=3.0cm,        % linker Rand Fließtext
+  right=3.0cm,       % rechter Rand Fließtext
+  top=2.5cm,         % oberer Rand bis Fließtext
+  bottom=4.0cm,      % unterer Rand ab Fließtext
+  headheight=1.5cm,  % ausreichend Platz für die Logos (verhindert die Warnung)
+  headsep=0.6cm,     % Abstand Kopfzeile -> Fließtext
+  footskip=1.5cm,    % Abstand Fließtext -> Fußzeile/Seitenzahl
 ]{geometry}
 \usepackage{pdflscape}
+\usepackage[section]{placeins}  % Floats fixieren: \FloatBarrier
+\setlength{\parskip}{6pt plus 1pt minus 1pt}
+\setlength{\parindent}{0pt}
+
 
 % ========================================
 % Farben
 % ========================================
 \usepackage{xcolor}
-\definecolor{hka_blue}{RGB}{58,104,170} % Beispiel-HKA-Blau (anpassbar)
-\definecolor{hka_red}{RGB}{214,37,6} % Beispiel-HKA-Blau (anpassbar)
+\usepackage{colortbl}
+\definecolor{kgegroup}{gray}{0.93}
+\definecolor{hka_blue}{RGB}{58,104,170}
+\definecolor{hka_red}{RGB}{214,37,6}
+% Nur in KOMA-Klassen verfügbar
+\@ifundefined{KOMAClassName}{}{%
+  \addtokomafont{disposition}{\color{hka_blue}}%
+}
 
 % ========================================
-% Kopf-/Fusszeile
+% Kopf-/Fusszeile (nur KOMA-Klassen)
 % ========================================
-\usepackage[automark]{scrlayer-scrpage}
-\pagestyle{scrheadings}
-% Alle voreingestellten Kopf-/Fußzeilen löschen
-\clearpairofpagestyles
-% Logo in der Außenkopfleiste:
-% bei zweiseitig = links auf geraden, rechts auf ungeraden Seiten
-\ohead{%
-  \centerlogo[1.4cm]{png/hka_logo}%
-  \ifdefstring{\CompanyName}{NoCompanyInvolved}{}{
-    \hspace{0.0cm}%
-    \centerlogo[1cm]{example-image-a}%
-  }%
+\@ifundefined{KOMAClassName}{}{%
+  \usepackage[automark]{scrlayer-scrpage}
+  \pagestyle{scrheadings}
+  \clearpairofpagestyles
+  \ohead{%
+    \centerlogo[1.4cm]{png/hka_logo}%
+    \ifdefstring{\CompanyName}{NoCompanyInvolved}{}{
+      \hspace{0.0cm}%
+      \centerlogo[1cm]{png/firmen_logo}%
+    }%
+  }
+  \ihead{\headmark}
+  \cfoot{\pagemark}
+  % \renewcommand*{\chapterpagestyle}{scrheadings}
 }
-\ihead{\headmark}
-% Seitenzahl in der Fußzeile zentriert
-\cfoot{\pagemark}
-% Optional: auch auf Kapitelanfangsseiten Kopfzeile anzeigen
-% \renewcommand*{\chapterpagestyle}{scrheadings}
 
 % ========================================
 % SONSTIGES
 % ========================================
 \usepackage{microtype} % Feineinstellung der Typografie
-\usepackage{placeins}  % Floats fixieren: \FloatBarrier
-\usepackage{scrhack}   % KOMA mit anderen Paketen harmonisieren
+\@ifundefined{KOMAClassName}{}{\usepackage{scrhack}}   % KOMA mit anderen Paketen harmonisieren
 \usepackage{makecell}  % Zeilenumbruch in Tabellenzellen
 \usepackage{hyperref}  % Hyperlinks
 \hypersetup{
@@ -178,12 +229,18 @@
 	filecolor=black,      
 	urlcolor=black,
 	pdftitle={\Title},
+  pdfauthor={\Name},
 	citecolor=black,
 	pdfpagemode=UseNone, % No automatic view setting
 	pdfstartpage=1,      % Starts on the first page
 	pdfstartview=Fit     % Shows the entire page in the window
 }
 \usepackage{lipsum}
+\usepackage[colorinlistoftodos, textwidth=2.4cm]{todonotes}
+\newcommand{\todox}[1]{\todo[color=blue!30]{#1}}
+\newcommand{\todoix}[1]{\todo[inline, color=orange!40]{#1}}
+\usepackage{pifont}
+\newcommand{\manoever}[1]{\textit{#1}} % Formatierung für fest definierte Manöverklassen
 
 % ========================================
 % FONTS (optional, für bessere Lesbarkeit)
@@ -192,6 +249,59 @@
 % \usepackage{mathpazo}
 % \usepackage{helvet}
 \usepackage{setspace}
+\raggedbottom
+
+% ========================================
+% PLOT-GRÖSSEN (für Plot-Wrapper)
+% ========================================
+% Eigenständiger Plot (standalone)
+\newlength{\pgfStandaloneWidth}
+\newlength{\pgfStandaloneHeight}
+\setlength{\pgfStandaloneWidth}{14cm}
+\setlength{\pgfStandaloneHeight}{9cm}
+
+% Subplot (nebeneinander / im Verbund)
+\newlength{\pgfSubplotWidth}
+\newlength{\pgfSubplotHeight}
+\setlength{\pgfSubplotWidth}{7cm}
+\setlength{\pgfSubplotHeight}{5cm}
+\renewcommand{\floatpagefraction}{1.0} % Erlaubt, dass eine Seite zu 85% aus Bild besteht und trotzdem noch Text dazukommt
+
+% ========================================
+% FARBEN FUER PLOTS (HTML-Notation)
+% ========================================
+%% ─── Manoever ─────────────────────────────────────────────────
+\definecolor{clrBorder}    {HTML}{3A68AA}  % Akzentfarbe (Pfeile, Marker)
+\definecolor{clrGerade}    {HTML}{5A5A5A}  % Konstante Gerade
+\definecolor{clrAccel}     {HTML}{1f77b4}  % Beschleunigung (gerade)
+\definecolor{clrBrake}     {HTML}{ff7f0e}  % Bremsung (gerade)
+\definecolor{clrCurve}     {HTML}{2ca02c}  % Konstante Kurve (R + L)
+\definecolor{clrCurveAccel}{HTML}{d62728}  % Beschleunigte Kurve
+\definecolor{clrCurveBrake}{HTML}{9467bd}  % Gebremste Kurve
+\definecolor{clrCurveL}     {HTML}{35C035}  % Konst. Kurve  links
+\definecolor{clrCurveR}     {HTML}{238023}  % Konst. Kurve  rechts
+\definecolor{clrCurveAccelL}{HTML}{FF2F30}  % Beschl. Kurve links
+\definecolor{clrCurveAccelR}{HTML}{AB1F20}  % Beschl. Kurve rechts
+\definecolor{clrCurveBrakeL}{HTML}{B27CE3}  % Gebr.  Kurve  links
+\definecolor{clrCurveBrakeR}{HTML}{765297}  % Gebr.  Kurve  rechts
+\definecolor{clrAx}{HTML}{1F77B4}   % tab10(0) – Blau
+\definecolor{clrAy}{HTML}{FF7F0E}   % tab10(1) – Orange
+\definecolor{clrV} {HTML}{2CA02C}   % tab10(2) – Grün
+\definecolor{clrIrrelev}{HTML}{B0B0B0}  % Irrelevant
+\definecolor{clrLevel1} {HTML}{2166ac}  % Level 1
+\definecolor{clrLevel2} {HTML}{67a9cf}  % Level 2
+\definecolor{clrLevel3} {HTML}{d1e5f0}  % Level 3
+\definecolor{clrLevel4} {HTML}{fddbc7}  % Level 4
+\definecolor{clrLevel5} {HTML}{ef8a62}  % Level 5
+% '#B0B0B0', 1: '#2166ac', 2: '#67a9cf', 3: '#d1e5f0', 4: '#fddbc7', 5: '#ef8a62'
+%% ─── Pipelines ─────────────────────────────────────────────────
+\definecolor{clrIO}{RGB}{58,104,170}       % hell-blau: I/O | 220,230,241
+\definecolor{clrProc}{RGB}{255,255,255}     % weiß: Verarbeitung
+\definecolor{clrBorder}{RGB}{58,104,170}    % dunkel-blau: Rahmen | 70,100,140
+\definecolor{clrArrow}{RGB}{58,104,170}     % 70,100,140
+\definecolor{clrGroup}{RGB}{58,104,170}    % sehr hell: Gruppierung | 240,245,250
+\definecolor{clrSmooth}{RGB}{80,140,80}
+\definecolor{clrRaw}{RGB}{170,100,40}
 
 % Ende settings.sty
 \endinput

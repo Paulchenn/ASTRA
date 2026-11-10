@@ -1,47 +1,17 @@
+% !TeX root = ../main.tex
 % 06-evaluation.tex
-\chapter{Evaluation}
+\chapter{Prüfstandsversuche und Auswertung}
 \label{chap:evaluation}
 
-In diesem Kapitel werden die gesammelten Ergebnisse präsentiert, analysiert und interpretiert. Es dient dazu, die in Kapitel~\ref{chap:introduction} aufgestellten Forschungsfragen anhand der implementierten Methodik quantitativ und qualitativ zu beantworten.
-
-\section{Versuchsaufbau}
-\begin{table}[h]
-  \centering
-  \begin{tabular}{lcc}
-    \toprule
-    & Versuch A & Versuch B \\
-    \midrule
-    Dauer & 2 h & 4 h \\
-    Ergebnis & $>90\,\%$ & $85\,\%$ \\
-    \bottomrule
-  \end{tabular}
-  \caption{Vergleich der Ergebnisse}
-  \label{tab:results}
-\end{table}
-
-\section{Vergleichende Visualisierung (Subfigures)}
-Um mehrere Diagramme oder Bilder direkt nebeneinander darzustellen und zu vergleichen, eignen sich sogenannte Subfigures. Abbildung~\ref{fig:subplots} zeigt ein Beispiel, in dem zwei Teilergebnisse nebeneinander platziert sind. Auf die einzelnen Teilbilder kann ebenfalls verwiesen werden, wie beispielsweise auf Abbildung~\ref{fig:sub1} für den ersten Versuch oder Abbildung~\ref{fig:sub2} für den zweiten.
+\lipsum[1]
 
 \begin{figure}[htbp]
-  \centering
-  \begin{subfigure}[b]{0.45\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{example-image-a}
-    \caption{Erstes Teilergebnis}
-    \label{fig:sub1}
-  \end{subfigure}
-  \hfill
-  \begin{subfigure}[b]{0.45\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{example-image-b}
-    \caption{Zweites Teilergebnis}
-    \label{fig:sub2}
-  \end{subfigure}
-  \caption{Vergleich zweier Ansätze durch Subfigures. (a) zeigt den ersten Ansatz, während (b) den zweiten darstellt.}
-  \label{fig:subplots}
+    \input{figures/pgf/07_testbenchtrails_evaluation/emi_drift_correction_dCm_PM10.pgf}
+    \subcaption{Spezifischen Feinstaubemissionen je Aufrau-Zyklus über kumulierter Verschleißarbeit $\sum_i W_{\mathrm{wear},i}$ sowie zugehörige Power-Law-Fits~$\hat{y}_k(x)$.}
+    \label{fig:drift_emission}
 \end{figure}
 
-\section{Ergebnisinterpretation}
-Die Auswertung der Tabellen und Abbildungen zeigt deutlich, dass Versuch B trotz längerer Dauer eine geringere Erfolgsquote aufweist (siehe Tabelle~\ref{tab:results}). Dies korreliert mit den Beobachtungen aus Abbildung~\ref{fig:sub2}.
 
-\clearpage
+
+% End of File

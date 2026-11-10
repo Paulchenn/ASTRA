@@ -1,0 +1,175 @@
+% \documentclass[tikz, border=10pt]{standalone}
+% \usepackage[T1]{fontenc}
+% \usepackage[utf8]{inputenc}
+% \usepackage{tikz}
+% \usetikzlibrary{arrows.meta}
+
+\newcommand{\streckeScale}{0.49}
+
+%% ─── Stile ──────────────────────────────────────────────────────────────────
+\tikzset{
+  road/.style={
+    line width=9pt, color=gray!20,
+    line cap=round, line join=round
+  },
+  cline/.style={
+    line width=3pt, line cap=round, line join=round, opacity=0.80
+  },
+  dirarrw/.style={
+    -{Stealth[length=4pt, width=2.5pt]},
+    line width=0.75pt, color=gray!20
+  },
+  startmark/.style={
+    circle, fill=clrBorder, minimum size=6pt, inner sep=0pt
+  },
+  endmark/.style={
+    circle, fill=white, draw=clrBorder, line width=1.2pt,
+    minimum size=6pt, inner sep=0pt
+  },
+}
+
+% \begin{document}
+\noindent\begin{tikzpicture}[scale=\streckeScale]
+
+%%
+%% Streckengeometrie (Vogelansicht) – alle Bögen R = 1, 90°-Sweeps:
+%%
+%%  (0,0) →→→ (4,0)                     Seg 1–3  Gerade
+%%  Seg  4  R-Kurve: (4,0)  → (5,−1)  ↓
+%%  Seg  5  L-Kurve: (5,−1) → (6,−2)  →
+%%  Seg  6  gerade:  (6,−2) → (7,−2)  →
+%%  Seg  7  L-Kurve: (7,−2) → (8,−1)  ↑
+%%  Seg  8  gerade:  (8,−1) → (8, 0.5)  ↑
+%%  Seg  9  L-Kurve: (8, 1) → (7, 1)  ←
+%%  Seg 10  R-Kurve: (7, 2) → (6, 2)  ↑
+%%  Seg 11  gerade:  (6, 3) → (6, 3)  ↑
+%%  Seg 12  R-Kurve: (6,4.5)→ (7, 4)  →
+%%
+
+%% ── Straßenoberfläche (grauer Hintergrundstreifen) ───────────────────────
+\draw[road]
+  (0,0) -- (4,0)
+  arc[start angle= 90, end angle=  0, radius=1]   % Seg  4
+  arc[start angle=180, end angle=270, radius=1]   % Seg  5
+  -- (7,-2)                                        % Seg  6
+  arc[start angle=270, end angle=360, radius=1]   % Seg  7
+  -- (8, 0.5)                                        % Seg  8
+  arc[start angle=  0, end angle= 90, radius=1]   % Seg  9
+  arc[start angle=270, end angle=180, radius=1]   % Seg 10
+  -- (6, 4)                                      % Seg 11
+  arc[start angle=180, end angle= 90, radius=1];  % Seg 12
+
+%% ── Manöverabschnitte (farbkodiert) ─────────────────────────────────────
+
+%  1 · Beschleunigung (gerade)
+\draw[cline, color=clrAccel]
+  (0,0) -- (1.5,0);
+
+%  2 · Konstante Gerade
+\draw[cline, color=clrGerade]
+  (1.5,0) -- (3.0,0);
+
+%  3 · Bremsung (gerade)
+\draw[cline, color=clrBrake]
+  (3.0,0) -- (4.0,0);
+
+%  4 · Konstante Kurve rechts
+%      Start (4,0) @ 90°, Mitte (4,−1), Ende (5,−1) ↓
+\draw[cline, color=clrCurveR]
+  (4,0) arc[start angle=90, end angle=0, radius=1];
+
+%  5 · Konstante Kurve links
+%      Start (5,−1) @ 180°, Mitte (6,−1), Ende (6,−2) →
+\draw[cline, color=clrCurveL]
+  (5,-1) arc[start angle=180, end angle=270, radius=1];
+
+%  6 · Bremsung (gerade)
+\draw[cline, color=clrBrake]
+  (6,-2) -- (7,-2);
+
+%  7 · Beschleunigte Kurve links
+%      Start (7,−2) @ 270°, Mitte (7,−1), Ende (8,−1) ↑
+\draw[cline, color=clrCurveAccelL]
+  (7,-2) arc[start angle=270, end angle=360, radius=1];
+
+%  8 · Konstante Gerade
+\draw[cline, color=clrGerade]
+  (8,-1) -- (8,0.5);
+
+%  9 · Gebremste Kurve links
+%      Start (8,0.5) @ 0°, Mitte (7,1), Ende (7,1.5) ←
+\draw[cline, color=clrCurveBrakeL]
+  (8,0.5) arc[start angle=0, end angle=90, radius=1];
+
+% 10 · Beschleunigte Kurve rechts
+%      Start (7,1.5) @ 270°, Mitte (7,2), Ende (6,2.5) ↑
+\draw[cline, color=clrCurveAccelR]
+  (7,1.5) arc[start angle=270, end angle=180, radius=1];
+
+% 11 · Konstante Gerade
+\draw[cline, color=clrGerade]
+  (6,2.5) -- (6,4);
+
+% 12 · Gebremste Kurve rechts
+%      Start (6,4) @ 180°, Mitte (7,4.5), Ende (7,5) →
+\draw[cline, color=clrCurveBrakeR]
+  (6,4) arc[start angle=180, end angle=90, radius=1];
+
+%% ── Segment-Nummern (außerhalb des Fahrstreifens) ─────────────────────────
+\node[font=\scriptsize\bfseries, color=clrAccel]      at ( 0.75,  0.55) {1};
+\node[font=\scriptsize\bfseries, color=clrGerade]     at ( 2.25,  0.55) {2};
+\node[font=\scriptsize\bfseries, color=clrBrake]      at ( 3.50,  0.55) {3};
+\node[font=\scriptsize\bfseries, color=clrCurveR]      at ( 5.10,  0.05) {4};  % außen R-Kurve
+\node[font=\scriptsize\bfseries, color=clrCurveL]      at ( 4.90, -2.05) {5};  % außen L-Kurve
+\node[font=\scriptsize\bfseries, color=clrBrake]      at ( 6.50, -2.55) {6};
+\node[font=\scriptsize\bfseries, color=clrCurveAccelL] at ( 8.10, -2.05) {7};  % außen L-Kurve
+\node[font=\scriptsize\bfseries, color=clrGerade]     at ( 8.55, -0.25) {8};
+\node[font=\scriptsize\bfseries, color=clrCurveBrakeL] at ( 8.10,  1.55) {9};  % außen L-Kurve
+\node[font=\scriptsize\bfseries, color=clrCurveAccelR] at ( 5.90,  1.45) {10}; % außen R-Kurve
+\node[font=\scriptsize\bfseries, color=clrGerade]     at ( 5.45,  3.25) {11};
+\node[font=\scriptsize\bfseries, color=clrCurveBrakeR] at ( 5.90,  5.05) {12}; % außen R-Kurve
+
+%% ── Fahrtrichtungspfeile ─────────────────────────────────────────────────
+\draw[dirarrw] (1.75, 0.00) -- (2.75, 0.00);  % Seg  1  →
+\draw[dirarrw] (8.00,-0.75) -- (8.00, 0.25);  % Seg  8  ↑
+\draw[dirarrw] (6.00, 2.75) -- (6.00, 3.75);  % Seg 11  ↑
+
+%% ── Start / Ende ─────────────────────────────────────────────────────────
+\node[startmark] at (0,0) {};
+\node[font=\scriptsize\bfseries, color=clrBorder, anchor=east]
+  at (-0.25, 0.00) {Start};
+
+\node[endmark] at (7,5) {};
+\node[font=\scriptsize\bfseries, color=clrBorder, anchor=west]
+  at ( 7.25, 5) {Ende};
+
+%% ── Legende ──────────────────────────────────────────────────────────────
+
+% Zeile 1  (y = −2.85)
+% \draw[cline, color=clrAccel]
+%   (0.00,-2.85) -- (0.55,-2.85);
+% \node[font=\small, anchor=west] at (0.70,-2.85) {Beschleunigung};
+
+% \draw[cline, color=clrGerade]
+%   (3.40,-2.85) -- (3.95,-2.85);
+% \node[font=\small, anchor=west] at (4.10,-2.85) {Konst.\,Gerade};
+
+% \draw[cline, color=clrBrake]
+%   (6.50,-2.85) -- (7.05,-2.85);
+% \node[font=\small, anchor=west] at (7.20,-2.85) {Bremsung};
+
+% % Zeile 2  (y = −3.55)
+% \draw[cline, color=clrCurve]
+%   (0.00,-3.55) -- (0.55,-3.55);
+% \node[font=\small, anchor=west] at (0.70,-3.55) {Konst.\,Kurve};
+
+% \draw[cline, color=clrCurveAccel]
+%   (3.40,-3.55) -- (3.95,-3.55);
+% \node[font=\small, anchor=west] at (4.10,-3.55) {Beschl.\,Kurve};
+
+% \draw[cline, color=clrCurveBrake]
+%   (6.50,-3.55) -- (7.05,-3.55);
+% \node[font=\small, anchor=west] at (7.20,-3.55) {Gebr.\,Kurve};
+
+\end{tikzpicture}
+% \end{document}
